@@ -1,24 +1,12 @@
-beamer:
-	pdflatex -synctex=1 -interaction=nonstopmode main
-	bibtex main
-	pdflatex -synctex=1 -interaction=nonstopmode main
-	pdflatex -synctex=1 -interaction=nonstopmode main
 
-beamer-en:
-	pdflatex -synctex=1 -interaction=nonstopmode main-en
-	bibtex main-en
-	pdflatex -synctex=1 -interaction=nonstopmode main-en
-	pdflatex -synctex=1 -interaction=nonstopmode main-en
 
-doc:
-	xelatex thubeamer.dtx
-	makeindex -s gind.ist -o thubeamer.ind thubeamer.idx
-	makeindex -s gglo.ist -o thubeamer.gls thubeamer.glo
-	xelatex thubeamer.dtx
-	xelatex thubeamer.dtx
+.PHONY: all
+all:
+	latexmk -xelatex main.tex
 
+.PHONY: clean
 clean:
-	rm -f *.toc *.bbl *.blg *.out *.aux *.log *.bak *.thm *.synctex.gz *.fdb_latexmk *.fls *.glo *.gls *.idx *.ilg *.ind *.nav *.snm *.hd
-
-cleanall:
-	rm -f *.toc *.bbl *.blg *.out *.aux *.log *.bak *.thm *.synctex.gz *.fdb_latexmk *.fls *.glo *.gls *.idx *.ilg *.ind *.nav *.snm *.hd *.sty *.ins
+	@#latexmk -C # it cleans all, i.e., also deletes pdf files
+	# latexmk -c
+	$(RM) -f *.aux *.log *.out *.bbl *.blg *.toc *.vrb *.snm *.nav
+	$(RM) -f *.dvi *.fls *.fdb_latexmk *.xdv
